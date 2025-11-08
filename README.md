@@ -23,7 +23,7 @@ You don't need to be a developer to use this. **Copy, paste, and collaborate.**
 1.  **Choose your persona level:**
    * **Level 1:** [`Role-Player`](prompts/MPP_RolePlayer_Lvl1.md)
    * **Level 2:** [`Domain Expert`](prompts/MPP_DomainExpert_Lvl2.md)
-   * **Level 3:** [`Synthesis Partner`](prompts/MPP_Synthesis_Lvl3.md)
+   * **Level 3:** [`Synthesis Partner`](/MPP_Level3:SynthesisPartner.md)
    * **Level 4** [`Orchestrator (MPP)`](/MPP_Level4:Orchestrator.md)
     * **Level 5:** [`Prompt Generator`](prompts/MPP_PromptMaker_Lvl5.md)
 
