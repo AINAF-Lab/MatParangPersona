@@ -88,3 +88,15 @@ The **`Tulang Empat Kerat`** (Four-Boned Framework) ensures MPP is **wise, respe
 *Levels 1–3* can be run in free AI chat.  
 *Level 4* requires an app managing multiple agents.  
 *Level 5* is a pre-autonomous prompt creator.
+
+## 📂 Repository Structure
+
+/prompts MPP_RolePlayer_Lvl1.md MPP_DomainExpert_Lvl2.md MPP_Synthesis_Lvl3.md MPP_Orchestrator_Lvl4.md MPP_PromptMaker_Lvl5.md /docs AINAF_Overview.md PUAP_Method.md EmpatKerat_Philosophy.md /examples MPP_Examples.md README.md CONTRIBUTING.md LICENSE
+
+## 📝 Contributing
+
+We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## ⚖️ License
+
+This project is licensed under the **MIT License** – see [LICENSE](LICENSE) for details.
