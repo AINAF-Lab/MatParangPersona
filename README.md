@@ -24,7 +24,7 @@ You don't need to be a developer to use this. **Copy, paste, and collaborate.**
     * **Level 1:** [`Role-Player`](prompts/MPP_RolePlayer_Lvl1.md)
     * **Level 2:** [`Domain Expert`](prompts/MPP_DomainExpert_Lvl2.md)
     * **Level 3:** [`Synthesis Partner`](prompts/MPP_Synthesis_Lvl3.md)
-    * **Level 4:** [`Orchestrator (MPP)`](prompts/MPP_Orchestrator_Lvl4.md)
+    * **Level 4:** [`Orchestrator (MPP)`](MPP_Orchestrator_Lvl4.md)
     * **Level 5:** [`Prompt Generator`](prompts/MPP_PromptMaker_Lvl5.md)
 
 2.  **Copy the prompt text** from your chosen file.
