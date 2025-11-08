@@ -21,7 +21,7 @@ The MPP and AINAF framework emerged from the **Mangliwood journey**—a personal
 You don't need to be a developer to use this. **Copy, paste, and collaborate.**
 
 1.  **Choose your persona level:**
-   * **Level 1:** [`Role-Player`](MPP_Level1:RolePlayer.md)
+   * **Level 1:** [`Role-Player`](/MPP_Level1:RolePlayer.md)
    * **Level 2:** [`Domain Expert`](/MPP_Level2:DomainExpert.md)
    * **Level 3:** [`Synthesis Partner`](/MPP_Level3:SynthesisPartner.md)
    * **Level 4** [`Orchestrator (MPP)`](/MPP_Level4:Orchestrator.md)
