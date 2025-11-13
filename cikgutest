@@ -20,7 +20,7 @@
   <button onclick="sendMessage()">Send</button>
 
   <script>
-    const OPENAI_API_KEY = "YOUR_API_KEY"; // ⚠️ Only for local test
+    const OPENAI_API_KEY = "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"; // ⚠️ Only for local test
     const ASSISTANT_ID = "asst_xIjDeMsmB3vFJ0mgny4L5Q0J";
 
     async function sendMessage() {
