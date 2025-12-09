@@ -1,31 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Literacy Tools</title>
+<title>Laman Utama AI Literacy</title>
 <style>
-body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; background: #f4f4f4; }
-h1, h2 { text-align: center; color: #333; }
-p { font-size: 16px; line-height: 1.5; }
-button { padding: 12px 25px; margin: 10px; font-size: 16px; cursor: pointer; }
-nav { text-align: center; margin-top: 20px; }
+  body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; background:#f4f4f4;}
+  h1 { text-align: center; color:#333;}
+  button { padding: 10px 20px; margin: 10px; font-size:16px; cursor:pointer;}
 </style>
 </head>
 <body>
 
-<h1>Welcome to AI Literacy Tools</h1>
-<p>This platform helps students, teachers, and parents generate AI prompts easily.  
-Use the Persona Prompt Generator to create advanced AI personas, or the General Prompt Generator to build high-quality SCOFFE prompts.</p>
-
-<div style="text-align:center;">
-  <button onclick="location.href='persona.html'">Persona Prompt Generator</button>
-  <button onclick="location.href='general.html'">General Prompt Generator</button>
+<div style="text-align:center; margin-bottom:20px;">
+  <button onclick="switchLanguage('ms')">Bahasa Melayu</button>
+  <button onclick="switchLanguage('en')">English</button>
 </div>
 
-<nav>
-  <small>CSR Project: AI Literacy Class</small>
-</nav>
+<h1 id="title">Selamat Datang ke AI Literacy</h1>
+<p id="intro" style="text-align:center;">Pilih alat yang anda ingin gunakan:</p>
+
+<div style="text-align:center;">
+  <button onclick="location.href='general.html'" id="btn-general">Penjana Prompt Umum</button>
+  <button onclick="location.href='persona.html'" id="btn-persona">Penjana Prompt Persona</button>
+</div>
+
+<script>
+const translations = {
+  ms: {
+    title: "Selamat Datang ke AI Literacy",
+    intro: "Pilih alat yang anda ingin gunakan:",
+    btnGeneral: "Penjana Prompt Umum",
+    btnPersona: "Penjana Prompt Persona"
+  },
+  en: {
+    title: "Welcome to AI Literacy",
+    intro: "Select the tool you want to use:",
+    btnGeneral: "General Prompt Generator",
+    btnPersona: "Persona Prompt Generator"
+  }
+};
+
+function switchLanguage(lang){
+  document.getElementById('title').textContent = translations[lang].title;
+  document.getElementById('intro').textContent = translations[lang].intro;
+  document.getElementById('btn-general').textContent = translations[lang].btnGeneral;
+  document.getElementById('btn-persona').textContent = translations[lang].btnPersona;
+}
+</script>
 
 </body>
 </html>
