@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persona Prompt Generator</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; background: #f4f4f4; }
+h1 { text-align: center; color: #333; }
+label { display: block; margin-top: 15px; font-weight: bold; }
+input, textarea { width: 100%; padding: 8px; margin-top: 5px; font-size: 14px; box-sizing: border-box; }
+button { padding: 10px 20px; margin: 10px 5px 0 0; font-size: 16px; cursor: pointer; }
+pre { background: #eee; padding: 10px; white-space: pre-wrap; word-wrap: break-word; margin-top: 10px; }
+nav { text-align: center; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Persona Prompt Generator</h1>
+
+<label>Persona Role
+  <input id="role" placeholder="e.g., ENG-DIRECTOR">
+</label>
+<label>Task Description
+  <textarea id="task" placeholder="Describe the task for this persona."></textarea>
+</label>
+<label>Extra Notes
+  <textarea id="notes" placeholder="Optional context or constraints."></textarea>
+</label>
+
+<button id="assemble">Assemble Persona Prompt</button>
+<pre id="assembled"></pre>
+<button id="copy">Copy Prompt</button>
+
+<nav>
+  <button onclick="location.href='index.html'">Back to Home</button>
+  <button onclick="location.href='general.html'">Go to General Prompt Generator</button>
+</nav>
+
+<script>
+document.getElementById('assemble').addEventListener('click', () => {
+  const role = document.getElementById('role').value.trim();
+  const task = document.getElementById('task').value.trim();
+  const notes = document.getElementById('notes').value.trim();
+  if(!role || !task){
+    alert("Please fill in both Persona Role and Task Description.");
+    return;
+  }
+  let assembled = `Persona Role: ${role}\nTask: ${task}`;
+  if(notes) assembled += `\nNotes: ${notes}`;
+  assembled += `\nThen: use this persona in your AI model for task execution.`;
+  document.getElementById('assembled').textContent = assembled;
+});
+
+document.getElementById('copy').addEventListener('click', () => {
+  navigator.clipboard.writeText(document.getElementById('assembled').textContent);
+  alert("Persona prompt copied!");
+});
+</script>
+
+</body>
+</html>
