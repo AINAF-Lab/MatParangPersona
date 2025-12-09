@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Persona Prompt Generator</title>
+<title>Penjana Prompt Persona</title>
 <style>
 body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; background: #f4f4f4; }
 h1 { text-align: center; color: #333; }
@@ -16,34 +16,89 @@ nav { text-align: center; margin-top: 20px; }
 </head>
 <body>
 
-<h1>Persona Prompt Generator</h1>
+<div style="text-align:center; margin-bottom:20px;">
+  <button onclick="switchLanguage('ms')">Bahasa Melayu</button>
+  <button onclick="switchLanguage('en')">English</button>
+</div>
 
-<label>Persona Role
-  <input id="role" placeholder="e.g., ENG-DIRECTOR">
+<h1 id="title">Penjana Prompt Persona</h1>
+
+<label id="lbl-role">Peranan Persona
+  <input id="role" placeholder="cth., ENG-DIRECTOR">
 </label>
-<label>Task Description
-  <textarea id="task" placeholder="Describe the task for this persona."></textarea>
+<label id="lbl-task">Penerangan Tugasan
+  <textarea id="task" placeholder="Huraikan tugasan untuk persona ini."></textarea>
 </label>
-<label>Extra Notes
-  <textarea id="notes" placeholder="Optional context or constraints."></textarea>
+<label id="lbl-notes">Nota Tambahan
+  <textarea id="notes" placeholder="Konteks atau batasan tambahan (pilihan)."></textarea>
 </label>
 
-<button id="assemble">Assemble Persona Prompt</button>
+<button id="assemble">Hasilkan Prompt Persona</button>
 <pre id="assembled"></pre>
-<button id="copy">Copy Prompt</button>
+<button id="copy">Salin Prompt</button>
 
 <nav>
-  <button onclick="location.href='index.html'">Back to Home</button>
-  <button onclick="location.href='general.html'">Go to General Prompt Generator</button>
+  <button onclick="location.href='index.html'" id="btn-home">Kembali ke Laman Utama</button>
+  <button onclick="location.href='general.html'" id="btn-general">Pergi ke Penjana Prompt Umum</button>
 </nav>
 
 <script>
+const translations = {
+  ms: {
+    title: "Penjana Prompt Persona",
+    lblRole: "Peranan Persona",
+    rolePlaceholder: "cth., ENG-DIRECTOR",
+    lblTask: "Penerangan Tugasan",
+    taskPlaceholder: "Huraikan tugasan untuk persona ini.",
+    lblNotes: "Nota Tambahan",
+    notesPlaceholder: "Konteks atau batasan tambahan (pilihan).",
+    assemble: "Hasilkan Prompt Persona",
+    copy: "Salin Prompt",
+    btnHome: "Kembali ke Laman Utama",
+    btnGeneral: "Pergi ke Penjana Prompt Umum",
+    alertFill: "Sila isi Peranan Persona dan Penerangan Tugasan.",
+    alertCopied: "Prompt persona disalin!"
+  },
+  en: {
+    title: "Persona Prompt Generator",
+    lblRole: "Persona Role",
+    rolePlaceholder: "e.g., ENG-DIRECTOR",
+    lblTask: "Task Description",
+    taskPlaceholder: "Describe the task for this persona.",
+    lblNotes: "Extra Notes",
+    notesPlaceholder: "Optional context or constraints.",
+    assemble: "Assemble Persona Prompt",
+    copy: "Copy Prompt",
+    btnHome: "Back to Home",
+    btnGeneral: "Go to General Prompt Generator",
+    alertFill: "Please fill in both Persona Role and Task Description.",
+    alertCopied: "Persona prompt copied!"
+  }
+};
+
+function switchLanguage(lang){
+  document.getElementById('title').textContent = translations[lang].title;
+  document.getElementById('lbl-role').childNodes[0].textContent = translations[lang].lblRole;
+  document.getElementById('role').placeholder = translations[lang].rolePlaceholder;
+  document.getElementById('lbl-task').childNodes[0].textContent = translations[lang].lblTask;
+  document.getElementById('task').placeholder = translations[lang].taskPlaceholder;
+  document.getElementById('lbl-notes').childNodes[0].textContent = translations[lang].lblNotes;
+  document.getElementById('notes').placeholder = translations[lang].notesPlaceholder;
+  document.getElementById('assemble').textContent = translations[lang].assemble;
+  document.getElementById('copy').textContent = translations[lang].copy;
+  document.getElementById('btn-home').textContent = translations[lang].btnHome;
+  document.getElementById('btn-general').textContent = translations[lang].btnGeneral;
+  currentLang = lang;
+}
+
+let currentLang = 'ms';
+
 document.getElementById('assemble').addEventListener('click', () => {
   const role = document.getElementById('role').value.trim();
   const task = document.getElementById('task').value.trim();
   const notes = document.getElementById('notes').value.trim();
   if(!role || !task){
-    alert("Please fill in both Persona Role and Task Description.");
+    alert(translations[currentLang].alertFill);
     return;
   }
   let assembled = `Persona Role: ${role}\nTask: ${task}`;
@@ -54,7 +109,7 @@ document.getElementById('assemble').addEventListener('click', () => {
 
 document.getElementById('copy').addEventListener('click', () => {
   navigator.clipboard.writeText(document.getElementById('assembled').textContent);
-  alert("Persona prompt copied!");
+  alert(translations[currentLang].alertCopied);
 });
 </script>
 
