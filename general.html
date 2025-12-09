@@ -3,17 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Penjana Prompt Umum (SCOFFE)</title>
+<title>Penjana Prompt Umum</title>
 <style>
-  body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin:auto; background:#f4f4f4;}
-  h1 { text-align:center; color:#333;}
-  label { display:block; margin-top:15px; font-weight:bold; }
-  input, textarea { width:100%; padding:8px; margin-top:5px; font-size:14px; box-sizing:border-box; }
-  small { display:block; color:#555; margin-top:3px; }
-  button { padding:10px 20px; margin:10px 5px 0 0; font-size:16px; cursor:pointer; }
-  pre { background:#eee; padding:10px; white-space:pre-wrap; word-wrap:break-word; margin-top:10px;}
-  .error { color:red; margin-top:5px;}
-  .nav-buttons button { margin-top:10px;}
+body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; background: #f4f4f4; }
+h1 { text-align: center; color: #333; }
+label { display: block; margin-top: 15px; font-weight: bold; }
+input, textarea { width: 100%; padding: 8px; margin-top: 5px; font-size: 14px; box-sizing: border-box; }
+button { padding: 10px 20px; margin: 10px 5px 0 0; font-size: 16px; cursor: pointer; }
+pre { background: #eee; padding: 10px; white-space: pre-wrap; word-wrap: break-word; margin-top: 10px; }
+nav { text-align: center; margin-top: 20px; }
+.error { color: red; margin-top: 5px; }
 </style>
 </head>
 <body>
@@ -27,126 +26,147 @@
 
 <div id="scoffe-form">
   <label id="lbl-situation">Situasi
-    <input id="situation" maxlength="200" placeholder="Ayat ringkas yang menerangkan isu atau matlamat segera.">
-    <small id="help-situation">Ayat ringkas yang menerangkan isu atau matlamat segera (maks 200 aksara).</small>
+    <input id="situation" maxlength="200" placeholder="Satu ayat ringkas mengenai masalah atau keperluan.">
+    <small>Ayat ringkas tentang isu atau matlamat semasa.</small>
   </label>
 
   <label id="lbl-context">Konteks
-    <input id="context" maxlength="300" placeholder="1-2 fakta penting berkaitan tugasan.">
-    <small id="help-context">1-2 fakta penting berkaitan tugasan (maks 300 aksara).</small>
+    <input id="context" maxlength="300" placeholder="Fakta penting atau had berkaitan.">
+    <small>1-2 fakta ringkas yang relevan untuk tugas.</small>
   </label>
 
   <label id="lbl-operation">Operasi
-    <input id="operation" maxlength="120" placeholder="Apa yang anda mahu AI lakukan.">
-    <small id="help-operation">Apa yang anda mahu AI lakukan (maks 120 aksara).</small>
+    <input id="operation" maxlength="120" placeholder="Tindakan: ringkasan, draf, banding, dsb.">
+    <small>Apa tindakan yang dikehendaki model lakukan.</small>
   </label>
 
   <label id="lbl-persona">Persona
-    <input id="persona" maxlength="120" placeholder="Peranan/nada AI, contohnya: Ketua Produk Tenang">
-    <small id="help-persona">Peranan atau nada AI.</small>
+    <input id="persona" maxlength="120" placeholder="cth., Ketua Produk Tenang; jurutera kanan.">
+    <small>Peranan atau nada model AI.</small>
   </label>
 
   <label id="lbl-expectation">Jangkaan
-    <input id="expectation" maxlength="200" placeholder="Had/metrics, contohnya: max langkah, perkataan">
-    <small id="help-expectation">Had yang boleh diukur atau kriteria kejayaan.</small>
+    <input id="expectation" maxlength="200" placeholder="Had atau metrik kejayaan.">
+    <small>Batasan atau kriteria kejayaan.</small>
   </label>
 
   <label id="lbl-format">Format
-    <input id="format" maxlength="300" placeholder="Medan dan struktur output yang tepat.">
-    <small id="help-format">Medan dan struktur output yang tepat.</small>
+    <input id="format" maxlength="300" placeholder="Struktur output: tajuk, senarai, jawapan, dsb.">
+    <small>Medan dan struktur output.</small>
   </label>
 
   <label id="lbl-example">Contoh
-    <textarea id="example" maxlength="600" placeholder="Tampal 1-2 contoh output ringkas."></textarea>
-    <small id="help-example">Tampal 1-2 contoh output ringkas untuk kebolehgunaan semula.</small>
+    <textarea id="example" maxlength="600" placeholder="Contoh output (pilihan)."></textarea>
+    <small>1-2 contoh ringkas untuk rujukan.</small>
   </label>
 
   <div class="error" id="error-msg"></div>
 
   <button id="assemble">Hasilkan Prompt</button>
-  <button id="auto-correct">Betulkan Automatik (1 Pusingan)</button>
   <pre id="assembled"></pre>
   <button id="copy">Salin Prompt</button>
 
-  <div class="nav-buttons">
+  <div style="margin-top:20px;">
     <button onclick="location.href='index.html'" id="btn-home">Kembali ke Laman Utama</button>
     <button onclick="location.href='persona.html'" id="btn-persona">Pergi ke Penjana Prompt Persona</button>
   </div>
 </div>
 
 <script>
-// Translation dictionary
 const translations = {
   ms: {
     title: "Penjana Prompt Umum (SCOFFE)",
     lblSituation: "Situasi",
-    helpSituation: "Ayat ringkas yang menerangkan isu atau matlamat segera (maks 200 aksara).",
+    situationPlaceholder: "Satu ayat ringkas mengenai masalah atau keperluan.",
     lblContext: "Konteks",
-    helpContext: "1-2 fakta penting berkaitan tugasan (maks 300 aksara).",
+    contextPlaceholder: "Fakta penting atau had berkaitan.",
     lblOperation: "Operasi",
-    helpOperation: "Apa yang anda mahu AI lakukan (maks 120 aksara).",
+    operationPlaceholder: "Tindakan: ringkasan, draf, banding, dsb.",
     lblPersona: "Persona",
-    helpPersona: "Peranan atau nada AI.",
+    personaPlaceholder: "cth., Ketua Produk Tenang; jurutera kanan.",
     lblExpectation: "Jangkaan",
-    helpExpectation: "Had yang boleh diukur atau kriteria kejayaan.",
+    expectationPlaceholder: "Had atau metrik kejayaan.",
     lblFormat: "Format",
-    helpFormat: "Medan dan struktur output yang tepat.",
+    formatPlaceholder: "Struktur output: tajuk, senarai, jawapan, dsb.",
     lblExample: "Contoh",
-    helpExample: "Tampal 1-2 contoh output ringkas untuk kebolehgunaan semula.",
+    examplePlaceholder: "Contoh output (pilihan).",
     assemble: "Hasilkan Prompt",
-    autoCorrect: "Betulkan Automatik (1 Pusingan)",
     copy: "Salin Prompt",
     btnHome: "Kembali ke Laman Utama",
-    btnPersona: "Pergi ke Penjana Prompt Persona"
+    btnPersona: "Pergi ke Penjana Prompt Persona",
+    alertCopied: "Prompt disalin!"
   },
   en: {
     title: "General Prompt Generator (SCOFFE)",
     lblSituation: "Situation",
-    helpSituation: "Short sentence describing the immediate issue or goal (max 200 chars).",
+    situationPlaceholder: "One short sentence about the issue or need.",
     lblContext: "Context",
-    helpContext: "1-2 concise facts that matter for the task (max 300 chars).",
+    contextPlaceholder: "Key constraints or relevant facts.",
     lblOperation: "Operation",
-    helpOperation: "What you want the model to do (max 120 chars).",
+    operationPlaceholder: "Action: summarize, draft, compare, etc.",
     lblPersona: "Persona",
-    helpPersona: "The role or tone the AI should assume.",
+    personaPlaceholder: "e.g., Calm product lead; senior engineer.",
     lblExpectation: "Expectation",
-    helpExpectation: "Measurable limits or success criteria.",
+    expectationPlaceholder: "Limits or success metrics.",
     lblFormat: "Format",
-    helpFormat: "Exact output fields and structure.",
+    formatPlaceholder: "Output structure: subject line, bullets, reply, etc.",
     lblExample: "Example",
-    helpExample: "Paste 1-2 short exemplar outputs for reproducibility.",
+    examplePlaceholder: "Optional example output.",
     assemble: "Assemble Prompt",
-    autoCorrect: "Auto-Correct (1 Pass)",
     copy: "Copy Prompt",
     btnHome: "Back to Home",
-    btnPersona: "Go to Persona Prompt Generator"
+    btnPersona: "Go to Persona Prompt Generator",
+    alertCopied: "Prompt copied!"
   }
 };
 
+let currentLang = 'ms';
+
 function switchLanguage(lang){
-  document.getElementById('title').textContent = translations[lang].title;
-  document.getElementById('lbl-situation').childNodes[0].textContent = translations[lang].lblSituation;
-  document.getElementById('help-situation').textContent = translations[lang].helpSituation;
-  document.getElementById('lbl-context').childNodes[0].textContent = translations[lang].lblContext;
-  document.getElementById('help-context').textContent = translations[lang].helpContext;
-  document.getElementById('lbl-operation').childNodes[0].textContent = translations[lang].lblOperation;
-  document.getElementById('help-operation').textContent = translations[lang].helpOperation;
-  document.getElementById('lbl-persona').childNodes[0].textContent = translations[lang].lblPersona;
-  document.getElementById('help-persona').textContent = translations[lang].helpPersona;
-  document.getElementById('lbl-expectation').childNodes[0].textContent = translations[lang].lblExpectation;
-  document.getElementById('help-expectation').textContent = translations[lang].helpExpectation;
-  document.getElementById('lbl-format').childNodes[0].textContent = translations[lang].lblFormat;
-  document.getElementById('help-format').textContent = translations[lang].helpFormat;
-  document.getElementById('lbl-example').childNodes[0].textContent = translations[lang].lblExample;
-  document.getElementById('help-example').textContent = translations[lang].helpExample;
-  document.getElementById('assemble').textContent = translations[lang].assemble;
-  document.getElementById('auto-correct').textContent = translations[lang].autoCorrect;
-  document.getElementById('copy').textContent = translations[lang].copy;
-  document.getElementById('btn-home').textContent = translations[lang].btnHome;
-  document.getElementById('btn-persona').textContent = translations[lang].btnPersona;
+  currentLang = lang;
+  const t = translations[lang];
+  document.getElementById('title').textContent = t.title;
+  document.getElementById('lbl-situation').childNodes[0].textContent = t.lblSituation;
+  document.getElementById('situation').placeholder = t.situationPlaceholder;
+  document.getElementById('lbl-context').childNodes[0].textContent = t.lblContext;
+  document.getElementById('context').placeholder = t.contextPlaceholder;
+  document.getElementById('lbl-operation').childNodes[0].textContent = t.lblOperation;
+  document.getElementById('operation').placeholder = t.operationPlaceholder;
+  document.getElementById('lbl-persona').childNodes[0].textContent = t.lblPersona;
+  document.getElementById('persona').placeholder = t.personaPlaceholder;
+  document.getElementById('lbl-expectation').childNodes[0].textContent = t.lblExpectation;
+  document.getElementById('expectation').placeholder = t.expectationPlaceholder;
+  document.getElementById('lbl-format').childNodes[0].textContent = t.lblFormat;
+  document.getElementById('format').placeholder = t.formatPlaceholder;
+  document.getElementById('lbl-example').childNodes[0].textContent = t.lblExample;
+  document.getElementById('example').placeholder = t.examplePlaceholder;
+  document.getElementById('assemble').textContent = t.assemble;
+  document.getElementById('copy').textContent = t.copy;
+  document.getElementById('btn-home').textContent = t.btnHome;
+  document.getElementById('btn-persona').textContent = t.btnPersona;
 }
 
-// The rest of your SCOFFE JS logic (assemble, verify, copy) stays unchanged
+// Flexible assemble: only include non-empty fields
+function assemblePrompt(){
+  const fields = ['situation','context','operation','persona','expectation','format','example'];
+  const parts = [];
+  fields.forEach(id => {
+    const val = document.getElementById(id).value.trim();
+    if(val) parts.push(`${translations[currentLang]['lbl' + id.charAt(0).toUpperCase() + id.slice(1)]}: ${val}`);
+  });
+  parts.push("Then: generate the output following the Format exactly; if the output does not meet Expectation, produce a 1-line rationale and a corrected version.");
+  return parts.join('\n');
+}
+
+document.getElementById('assemble').addEventListener('click', () => {
+  const prompt = assemblePrompt();
+  document.getElementById('assembled').textContent = prompt;
+});
+
+document.getElementById('copy').addEventListener('click', () => {
+  navigator.clipboard.writeText(document.getElementById('assembled').textContent);
+  alert(translations[currentLang].alertCopied);
+});
 </script>
 
 </body>
